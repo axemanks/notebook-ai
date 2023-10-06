@@ -22,8 +22,10 @@ type Props = { note: NoteType };
  * Enables AI autocompletion via OpenAI API when Shift+A is pressed.
  */
 const TipTapEditor = ({ note }: Props) => {
-  const [editorState, setEditorState] = React.useState(note.editorState || `
+  const [editorState, setEditorState] = React.useState(note.editorState || `  
   <h1>${note.name}</h1>
+  <p>Start writing your note here...</p>
+  
   `);
   // Completion hook - complete is the trigger function, completion is the result
   const { complete, completion } = useCompletion({
@@ -99,7 +101,7 @@ const TipTapEditor = ({ note }: Props) => {
       <div className="flex">
         {editor && <TipTapMenuBar editor={editor} />}
         {/* Save button */}
-        <Button disabled variant={"outline"}>
+        <Button disabled variant={"outline"} className="justify-end">
           {/* Saving | Saved - depends on isLoading */}
           {saveNote.isLoading ? "Saving..." : "Saved"}
         </Button>

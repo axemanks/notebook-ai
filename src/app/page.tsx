@@ -23,8 +23,13 @@ export default function Home() {
           <Link href='/dashboard'>
             <Button className='bg-green-600'>Get Started</Button>
           </Link>
-          <ArrowRight className='ml-2 w-5 h-5 mt-2' strokeWidth={3} />
+          <ArrowRight
+            className='ml-2 w-5 h-5 mt-2'
+            strokeWidth={3}
+          />
         </div>
+        <div className="mt-8"></div>
+        <p className='font-semibold text-center'>It&apos;s Free, just log in with an email</p>
       </div>
     </div>
   );
