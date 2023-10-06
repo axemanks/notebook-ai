@@ -7,7 +7,7 @@ import Provider from '@/components/Provider';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Notion-AI Clone',
+  title: 'Notebook-AI',
   description: 'Built by Keith Scheldt',
 };
 
