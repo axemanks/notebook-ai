@@ -7,6 +7,9 @@ import { generateImage, generateImagePrompt } from '@/lib/openai';
 import { auth } from '@clerk/nextjs';
 import { NextResponse } from 'next/server';
 
+// Vercel Edge function
+export const runtime = 'edge';
+
 export async function POST(req: Request) {
   const { userId } = auth();
   if (!userId) {
@@ -38,9 +41,9 @@ export async function POST(req: Request) {
     .returning({
       insertedId: $notes.id,
     });
-    console.log("Note ID from DB:", note_ids[0].insertedId) //TS
-    console.log(note_ids)
-    return NextResponse.json({
-      note_id: note_ids[0].insertedId,
-    });
+  console.log('Note ID from DB:', note_ids[0].insertedId); //TS
+  console.log(note_ids);
+  return NextResponse.json({
+    note_id: note_ids[0].insertedId,
+  });
 }
