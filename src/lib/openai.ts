@@ -15,7 +15,7 @@ export async function generateImagePrompt(name: string) {
         {
           role: 'system',
           content:
-            'You are a creative and helpful AI assistant, capable of generating interesting thumbnail descriptions for my notes. Your output will be fed into the DALLE API to generate a thumbnail. The description should be minimalistic and flat styled',
+            'You are a creative and helpful AI assistant, capable of generating interesting thumbnail descriptions for my notes. Your output will be fed into the DALLE API to generate a thumbnail. The description should be minimalistic and flat styled. Text in the image should be avoided, So please include a statment saying to NOT generate text in the image. Abastract art is fine. We want to keep the tone happy and fun. It would be better to have somthing abstract than to have text in the image.',
         },
         {
           role: 'user',

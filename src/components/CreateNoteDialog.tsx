@@ -14,12 +14,24 @@ import { Button } from './ui/button';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { uploadToFirebase } from '@/lib/firebase';
 
 type Props = {};
 // Create notebook dialog
 const CreateNoteDialog = (props: Props) => {
   const router = useRouter();
-const [input, setInput] = React.useState('');
+  const [input, setInput] = React.useState('');
+  // upload to firebase - pass in note id
+  const uploadToFirebase = useMutation({
+    mutationFn: async (noteId: string) => {
+      const response = await axios.post('/api/uploadToFirebase',{
+        noteId: noteId
+      })
+      return response.data
+    }
+  })
+
+  // create notebook
   const createNotebook = useMutation({
     mutationFn: async () => {
       const response = await axios.post('/api/create-notebook', {
@@ -30,8 +42,7 @@ const [input, setInput] = React.useState('');
     },
   });
 
-  
-
+  // handle submit
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (input === '') {
@@ -41,6 +52,9 @@ const [input, setInput] = React.useState('');
     createNotebook.mutate(undefined, {
       onSuccess: ({ note_id }) => {
         console.log('Created New Notebook:', { note_id });
+        // Hit another endpoint to upload the temp dalle url to permanent storage
+        uploadToFirebase.mutate(note_id,)
+
         router.push(`/notebook/${note_id}`);
       },
       onError: (error) => {
