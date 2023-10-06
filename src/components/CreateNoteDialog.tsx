@@ -24,12 +24,12 @@ const CreateNoteDialog = (props: Props) => {
   // upload to firebase - pass in note id
   const uploadToFirebase = useMutation({
     mutationFn: async (noteId: string) => {
-      const response = await axios.post('/api/uploadToFirebase',{
-        noteId: noteId
-      })
-      return response.data
-    }
-  })
+      const response = await axios.post('/api/uploadToFirebase', {
+        noteId: noteId,
+      });
+      return response.data;
+    },
+  });
 
   // create notebook
   const createNotebook = useMutation({
@@ -53,7 +53,7 @@ const CreateNoteDialog = (props: Props) => {
       onSuccess: ({ note_id }) => {
         console.log('Created New Notebook:', { note_id });
         // Hit another endpoint to upload the temp dalle url to permanent storage
-        uploadToFirebase.mutate(note_id,)
+        uploadToFirebase.mutate(note_id);
 
         router.push(`/notebook/${note_id}`);
       },
@@ -81,7 +81,8 @@ const CreateNoteDialog = (props: Props) => {
         <DialogHeader>
           <DialogTitle className='text-center'>New Note Book</DialogTitle>
           <DialogDescription className='text-center'>
-            You can create a new note by clicking below.
+            You can create a new note by entering a name and clicking create.
+            Thumbnail will be generated auto-magically
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit}>
@@ -110,6 +111,7 @@ const CreateNoteDialog = (props: Props) => {
             </Button>
           </div>
         </form>
+        
       </DialogContent>
     </Dialog>
   );
